@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import { llevarAvisosAlModal } from './Avisos'
 
 // Ventana modal con <dialog> nativo: gestiona el foco, Esc y el fondo sin librerías
 export const Modal = ({ abierto, alCerrar, titulo, descripcion, children, ancho = 'max-w-lg' }) => {
@@ -7,9 +8,14 @@ export const Modal = ({ abierto, alCerrar, titulo, descripcion, children, ancho 
 
     useEffect(() => {
         const dialogo = ref.current
-        if (!dialogo) return
-        if (abierto && !dialogo.open) dialogo.showModal()
-        if (!abierto && dialogo.open) dialogo.close()
+        if (!dialogo || !abierto) return undefined
+        if (!dialogo.open) dialogo.showModal()
+        // Los avisos (errores, confirmaciones) se muestran dentro del modal, por encima del fondo desenfocado
+        const soltarAvisos = llevarAvisosAlModal(dialogo)
+        return () => {
+            soltarAvisos()
+            if (dialogo.open) dialogo.close()
+        }
     }, [abierto])
 
     return (

@@ -1,10 +1,10 @@
 import { lazy, Suspense } from 'react'
 import { Navigate, Outlet, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { SesionProvider } from './context/Sesion'
 import { RutaPrivada, SoloInvitados } from './rutas/Rutas'
 import { Cargando } from './componentes/ui/Estados'
+import { Avisos } from './componentes/ui/Avisos'
 import { AvisoCookies } from './componentes/publico/AvisoCookies'
 import { RastreadorPaginas } from './componentes/publico/RastreadorPaginas'
 import LayoutPublico from './layouts/LayoutPublico'
@@ -47,7 +47,7 @@ const Raiz = () => (
             <Outlet />
         </Suspense>
         <AvisoCookies />
-        <ToastContainer position="top-right" autoClose={4000} newestOnTop theme="colored" />
+        <Avisos />
     </SesionProvider>
 )
 
