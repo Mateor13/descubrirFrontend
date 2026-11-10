@@ -1,13 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="https://cdn-icons-png.flaticon.com/512/1356/1356479.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Descubrir</title>
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="./src/main.jsx"></script> 
-</body>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>%SITIO_TITULO%</title>
+    <meta name="description" content="%SITIO_DESCRIPCION%">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#2f6e35">
+    <!--SITIO_CANONICAL-->
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_EC">
+    <meta property="og:site_name" content="%SITIO_NOMBRE%">
+    <meta property="og:title" content="%SITIO_TITULO%">
+    <meta property="og:description" content="%SITIO_DESCRIPCION%">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!--SITIO_JSONLD-->
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="font-family:sans-serif;padding:1rem">Para usar la plataforma de la Escuela Descubrir necesitas activar JavaScript en tu navegador.</p>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
