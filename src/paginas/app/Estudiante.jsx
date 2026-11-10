@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { PrinterIcon, PaperClipIcon } from '@heroicons/react/24/outline'
+import { PrinterIcon } from '@heroicons/react/24/outline'
+import { VerEvidencia } from '../../componentes/ui/Evidencia'
 import { academico, asistencias as apiAsistencias, estudiantes as api } from '../../api/v2'
 import { erroresPorCampo, mensajeError } from '../../api/cliente'
 import { useCarga } from '../../hooks/useCarga'
@@ -68,7 +69,7 @@ const Boletin = ({ id }) => {
                                                 <span className="min-w-0">
                                                     <span className="font-medium">{e.titulo}</span>
                                                     <span className="block text-xs text-slate-600">{TIPO_SINGULAR[e.tipo]} · {fecha(e.fecha)}
-                                                        {e.evidenciaUrl && <> · <a href={e.evidenciaUrl} target="_blank" rel="noopener noreferrer" className="enlace inline-flex items-center gap-0.5"><PaperClipIcon className="h-3 w-3" aria-hidden="true" />evidencia</a></>}
+                                                        {e.evidenciaUrl && <> · <VerEvidencia url={e.evidenciaUrl} titulo={e.titulo} texto="evidencia" className="enlace inline-flex items-center gap-0.5 text-xs" /></>}
                                                     </span>
                                                 </span>
                                                 <span className={`font-bold ${colorNota(e.nota, minima)}`}>{e.nota === null ? 'Sin nota' : nota(e.nota)}</span>
