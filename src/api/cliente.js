@@ -49,7 +49,9 @@ export const mensajeError = (error, porDefecto = 'Ocurrió un error, inténtelo 
     if (!error?.response) return 'No se pudo conectar con el servidor. Revise su conexión a internet.'
     const { status, data } = error.response
     if (status === 429) return data?.error || 'Demasiados intentos. Espere unos minutos.'
-    if (status >= 500) return 'El servidor tuvo un problema. Inténtelo más tarde.'
+    // 500 = error inesperado (mensaje genérico). Otros 5xx de la API traen un mensaje pensado para la persona
+    // (por ejemplo 502: no se pudo enviar el correo de activación).
+    if (status >= 500) return status !== 500 && typeof data?.error === 'string' ? data.error : 'El servidor tuvo un problema. Inténtelo más tarde.'
     return data?.error || porDefecto
 }
 
