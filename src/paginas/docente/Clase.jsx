@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { PlusIcon } from '@heroicons/react/20/solid'
-import { PaperClipIcon, PencilSquareIcon, TrashIcon, ClipboardDocumentListIcon } from '@heroicons/react/24/outline'
+import { PencilSquareIcon, TrashIcon, ClipboardDocumentListIcon } from '@heroicons/react/24/outline'
 import { academico, evaluaciones as api, estudiantes as apiEstudiantes } from '../../api/v2'
 import { erroresPorCampo, mensajeError } from '../../api/cliente'
 import { useCarga } from '../../hooks/useCarga'
@@ -14,6 +14,7 @@ import { Campo } from '../../componentes/ui/Campo'
 import { Boton } from '../../componentes/ui/Boton'
 import { Contenido, Vacio, Cargando, ErrorCarga } from '../../componentes/ui/Estados'
 import { comprimirImagen } from '../../lib/imagen'
+import { VerEvidencia } from '../../componentes/ui/Evidencia'
 import { TIPOS_EVALUACION, TIPO_SINGULAR, aISO, fecha, hoyISO, nombreCompleto } from '../../lib/formato'
 
 const TONO_TIPO = { deber: 'azul', taller: 'verde', prueba: 'ambar', examen: 'morado' }
@@ -102,7 +103,7 @@ const Evaluaciones = ({ clase, editable }) => {
                                     </div>
                                     <p className="mt-1 font-semibold text-slate-900">{ev.titulo}</p>
                                     {ev.descripcion && <p className="text-sm text-slate-600">{ev.descripcion}</p>}
-                                    {ev.evidenciaUrl && <a href={ev.evidenciaUrl} target="_blank" rel="noopener noreferrer" className="enlace mt-1 inline-flex items-center gap-1 text-sm"><PaperClipIcon className="h-4 w-4" aria-hidden="true" />Ver evidencia</a>}
+                                    {ev.evidenciaUrl && <VerEvidencia url={ev.evidenciaUrl} titulo={ev.titulo} className="enlace mt-1 inline-flex items-center gap-1 text-sm" />}
                                 </div>
                                 <div className="flex shrink-0 flex-wrap gap-2">
                                     <Link to={`/app/evaluaciones/${ev.id}`} className="btn-primario btn-sm"><ClipboardDocumentListIcon className="h-4 w-4" aria-hidden="true" />{editable ? 'Calificar' : 'Ver notas'}</Link>
