@@ -1,8 +1,18 @@
 import axios from 'axios'
 
-// URL de la API v2. Por defecto: <VITE_BACKEND_URL>/v2 (VITE_BACKEND_URL ya termina en /api).
-const base = import.meta.env.VITE_API_V2_URL
-    || `${(import.meta.env.VITE_BACKEND_URL || '').replace(/\/$/, '')}/v2`
+// URL de la API v2. Se acepta VITE_BACKEND_URL con o sin "https://" y con o sin "/api" al final:
+//   escuela.vercel.app | https://escuela.vercel.app | https://escuela.vercel.app/api  ->  https://escuela.vercel.app/api/v2
+// Sin protocolo, el navegador tomaría la dirección como una ruta del propio frontend.
+const conProtocolo = (url) => (/^https?:\/\//i.test(url) ? url : `https://${url}`)
+
+export const urlApiV2 = ({ VITE_API_V2_URL: v2, VITE_BACKEND_URL: backend } = {}) => {
+    if (v2?.trim()) return conProtocolo(v2.trim()).replace(/\/+$/, '')
+    if (!backend?.trim()) return '/api/v2' // mismo dominio (útil con un proxy)
+    const raiz = conProtocolo(backend.trim()).replace(/\/+$/, '').replace(/\/v2$/, '')
+    return `${/\/api$/.test(raiz) ? raiz : `${raiz}/api`}/v2`
+}
+
+const base = urlApiV2(import.meta.env)
 
 const CLAVE_TOKEN = 'descubrir.token'
 localStorage.removeItem('token') // token de la v1: no sirve en la v2
