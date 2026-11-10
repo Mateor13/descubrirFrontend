@@ -14,6 +14,7 @@ Sitio público y plataforma académica de la Escuela de Educación Básica Parti
 
 ```bash
 cp .env.example .env.local   # completar los valores
+nvm use        # Node 24 (ver .nvmrc)
 npm install
 npm run dev
 npm run build                # genera dist/ con sitemap.xml, robots.txt y 404.html
