@@ -10,6 +10,7 @@ import { RastreadorPaginas } from './componentes/publico/RastreadorPaginas'
 import LayoutPublico from './layouts/LayoutPublico'
 import Inicio from './paginas/publico/Inicio'
 import NoEncontrado from './paginas/publico/NoEncontrado'
+import ErrorApp from './paginas/publico/ErrorApp'
 
 // Carga diferida: cada sección se descarga solo cuando se visita (la portada pesa lo mínimo)
 const LayoutCuenta = lazy(() => import('./layouts/LayoutCuenta'))
@@ -51,7 +52,7 @@ const Raiz = () => (
 )
 
 const router = createBrowserRouter(createRoutesFromElements(
-    <Route element={<Raiz />}>
+    <Route element={<Raiz />} errorElement={<ErrorApp />}>
         <Route element={<LayoutPublico />}>
             <Route index element={<Inicio />} />
             <Route path="aviso-legal" element={<AvisoLegal />} />
@@ -67,7 +68,7 @@ const router = createBrowserRouter(createRoutesFromElements(
             <Route path="v2/restablecer/:token" element={<CrearPassword modo="restablecer" />} />
         </Route>
 
-        <Route path="app" element={<RutaPrivada><LayoutApp /></RutaPrivada>}>
+        <Route path="app" element={<RutaPrivada><LayoutApp /></RutaPrivada>} errorElement={<ErrorApp />}>
             <Route index element={<InicioApp />} />
             <Route path="perfil" element={<Perfil />} />
             <Route path="estudiantes/:id" element={<Estudiante />} />
